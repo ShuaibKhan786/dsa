@@ -1,9 +1,0 @@
-## DESCRIPTION
-Just a repo me practising DSA problems
-
-## PROBLEMS
-
-1. duplicate in array (set) [mySolution]()
-2. is Anagram (hmap, store character count) [mySolution]()
-3. k most frequent element (hmap , key = num, value = frequency, sorted bucket algo) [mySolution]()
-5. String Encode and Decode (attached length of string before actual string) [mySolution]()
