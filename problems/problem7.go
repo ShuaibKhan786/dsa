@@ -55,7 +55,7 @@ func main() {
 		result int
 	}{
 		{[]int{0, 3, 2, 5, 4, 6, 1, 1}, 7},
-		{[]int{2,20,4,10,3,4,5}, 4},
+		{[]int{2, 20, 4, 10, 3, 4, 5}, 4},
 		{[]int{0, -1, -2, 9, 1, 2}, 5},
 	}
 
@@ -63,7 +63,7 @@ func main() {
 		res := longestConsecutive(testCase.nums)
 		if res != testCase.result {
 			fmt.Printf("Test Failed %v, Expected: %d and Got: %v\n", testCase.nums, testCase.result, res)
-		}else {
+		} else {
 			fmt.Printf("Test Passed %v\n", testCase.nums)
 		}
 	}
