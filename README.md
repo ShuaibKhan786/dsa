@@ -15,3 +15,4 @@ I used neetcode [roadmap](https://neetcode.io/roadmap)
 ## PROBLEMS (Two Pointers)
 
 8. is palindrome (compare two pointer one from start and one from end, skip if the byte/character is not alphanumeric) [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/problems/problem8.go)
+9. Two Sum II - Input Array Is Sorted (array is sorted is ASC, left and right pointers) [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/problems/problem9.go)
