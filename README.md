@@ -16,4 +16,5 @@ I used neetcode [roadmap](https://neetcode.io/roadmap)
 
 8. is palindrome (compare two pointer one from start and one from end, skip if the byte/character is not alphanumeric) [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/problems/problem8.go)
 9. Two Sum II - Input Array Is Sorted (array is sorted is ASC, left and right pointers) [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/problems/problem9.go)
-10. Three Integer Sum (sort the array, positive sum cant be zero, impelement two sum(two pointer) logic in the inner loop) [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/problems/problem9.go)
+10. Three Integer Sum (sort the array, positive sum cant be zero, impelement two sum(two pointer) logic in the inner loop) [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/problems/problem10.go)
+11. Maximum Water Container ( used two pointer left and right , index will be the width and element is the actual height of bar, and find the area = min(height[left], height[right]) * (right - left) ) [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/problems/problem11.go)
