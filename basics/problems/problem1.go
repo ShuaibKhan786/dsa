@@ -3,32 +3,25 @@ package main
 import "strings"
 
 
-func evenOrOdd(num int) string {
-	if num & 1 == 0 {
-		return "even"
-		}else{
-		return "odd"
-	}
-}
-
- 
+// ##
+// ##	dyanmic programming 
+// ##
 func swap(n1, n2 *int) {
 	*n1, *n2 = *n2, *n1
-} 
-
+}
 
 func reverseNumber(num int) int {
 	//neutralizing a negative number to positive number
 	isNegative := false
 	if num < 0 {
-		isNegative = true 
+		isNegative = true
 		num = -num
 	}
 	result := 0
 
 	for num > 0 {
 		last := num % 10
-		result = result * 10 + last
+		result = result*10 + last
 		num = num / 10
 	}
 
@@ -37,9 +30,13 @@ func reverseNumber(num int) int {
 	}
 
 	return result
-} 
+}
 
 
+
+// ##
+// ##	Two pointers problems
+// ##
 func reverseString(str string) string {
 	// why this solution as go string is immutable
 	// and proper UTF-8 support
@@ -58,8 +55,8 @@ func validPalindrome(str string) bool {
 	// UTF-8 encoding support
 	runes := []rune(str)
 
-	for i := 0; i < len(runes) - 1; i++ {
-		if runes[i] != runes[len(runes) - 1 - i] {
+	for i := 0; i < len(runes)-1; i++ {
+		if runes[i] != runes[len(runes)-1-i] {
 			return false
 		}
 	}
@@ -79,6 +76,9 @@ func largestElement(nums []int) int {
 	return result
 }
 
+// ##
+// ##	hash set or hash map problems
+// ##
 func removeDuplicate(nums []int) int {
 	hset := make(map[int]struct{})
 
@@ -93,4 +93,36 @@ func removeDuplicate(nums []int) int {
 	}
 
 	return i
+}
+
+// ##
+// ##	bitwise manipulation problmes
+// ##
+func evenOrOdd(num int) string {
+	if num&1 == 0 {
+		return "even"
+	} else {
+		return "odd"
+	}
+}
+
+func missingElement(nums []int) int {
+	// nums contains range from [0 to n]
+	// all elements are distinct element
+	// nums = []int{ 0, 2}
+	// ans = 1
+	// 2 ^ 2 = 0
+	// 2 ^ 0 = 2
+	// 2 ^ 3 = 3 ^ 2
+
+	allXored := 0
+	for i := 1; i < len(nums)+1; i++ {
+		allXored ^= i
+	}
+
+	for _, num := range nums {
+		allXored ^= num
+	}
+
+	return allXored
 }
