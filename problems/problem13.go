@@ -1,5 +1,5 @@
 // Design a stack class that supports the
-// push, pop, top, and getMin operations.
+// xPush, xPop, xTop, and xGetMin operations.
 
 // newXStack() initializes the stack object.
 // xPush(int val) pushes the element val onto the stack.
@@ -11,11 +11,14 @@
 // input: ["MinStack", "push", 1, "push", 2, "push", 0, "getMin", "pop", "top", "getMin"]
 // Output: [null,null,null,null,0,null,2,1]
 // Explanation:
-// MinStack minStack = new MinStack();
-// minStack.push(1);
-// minStack.push(2);
-// minStack.push(0);
-// minStack.getMin();
+// xs := newXStack()
+// xs.xPush(1)
+// xs.xPush(2)
+// xs.xPush(0)
+// xs.xGetMin()  // return 0
+// xs.xPop()
+// xs.xTop()   	// return 2
+// xs.xGetMin() // return 1
 
 // Constraints:
 
