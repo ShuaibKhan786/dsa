@@ -21,3 +21,4 @@ I used neetcode [roadmap](https://neetcode.io/roadmap)
 
 ## PROBLEMS (Stack)
 12. Validate Parentheses [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/problems/problem12.go)
+13. Minimum Stack (maintained a minimum and normal stack, used minimum stack to  retrive the minimum value of the stack) [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/problems/problem13.go)
