@@ -42,13 +42,7 @@ func (s *Stack[T]) Pop() T {
 	return top
 }
 
-func (s *Stack[T]) Peek() T {
-	if len(*s) == 0 {
-		var zero T
-		return zero
-	}
-	return (*s)[len(*s)-1]
-}
+
 
 func validParenthesis(str string) bool {
 	s := make(Stack[rune], 0)
