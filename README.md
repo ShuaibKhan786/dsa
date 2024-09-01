@@ -27,3 +27,4 @@ I used neetcode [roadmap](https://neetcode.io/roadmap)
 
 ## BINARY (Binary Search)
 16. Binary Search [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/problems/problem16.go)
+17. Search 2D Matrix (find potential row by doing BS on first column and again do BS on that potential row) [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/problems/problem17.go)
