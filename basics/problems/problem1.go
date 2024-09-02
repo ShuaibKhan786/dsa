@@ -126,3 +126,17 @@ func missingElement(nums []int) int {
 
 	return allXored
 }
+
+func singleNumber(nums []int) int {
+	// Given a non-empty array of integers nums, 
+	// every element appears twice except for one. Find that single one
+	// 2 ^ 2 = 0
+
+	target := nums[0]
+
+	for i := 1 ; i < len(nums); i++ {
+		target ^= nums[i]
+	}
+
+	return target
+}

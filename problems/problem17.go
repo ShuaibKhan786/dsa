@@ -16,6 +16,13 @@
 // target = 15
 // Output: false
 
+// Constraints:
+
+// m == matrix.length
+// n == matrix[i].length
+// 1 <= m, n <= 100
+// -10000 <= matrix[i][j], target <= 10000
+
 package main
 
 import "fmt"
