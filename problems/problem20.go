@@ -36,17 +36,17 @@ func search(nums []int, target int) int {
 		switch {
 		case nums[mid] == target:
 			return mid
-		case nums[mid] > nums[right]: // unsorted part
-			if target < nums[mid] && target <= nums[right] {
-				left = mid + 1
-			} else {
+		case nums[mid] > nums[left]:
+			if nums[left] <= target && target < nums[mid] {
 				right = mid - 1
+			} else {
+				left = mid + 1
 			}
 		default:
-			if target < nums[mid] && target >= nums[left] {
-				right = mid - 1
-			} else {
+			if nums[mid] < target && target <= nums[right] {
 				left = mid + 1
+			} else {
+				right = mid - 1
 			}
 		}
 	}
