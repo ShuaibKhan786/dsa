@@ -1,10 +1,12 @@
 package main
 
-import "strings"
-
+import (
+	"math"
+	"strings"
+)
 
 // ##
-// ##	dyanmic programming 
+// ##	dyanmic programming
 // ##
 func swap(n1, n2 *int) {
 	*n1, *n2 = *n2, *n1
@@ -32,7 +34,36 @@ func reverseNumber(num int) int {
 	return result
 }
 
+// Trial division
+func isPrimeNumber(num int) bool {
+	if num <= 1 {
+		return false
+	}
 
+	for i := 2; i < int(math.Sqrt(float64(num))) + 1; i++ {
+		if num % i == 0 {
+			return false
+		}
+	}
+
+	return true
+}
+
+func nextNPrimes(start, num int) []int {
+	primes := make([]int, num)
+	primesIndex := 0
+
+	i := start + 1
+	for primesIndex < num {
+		if isPrimeNumber(i) {
+			primes[primesIndex] = i
+			primesIndex++
+		} 
+		i++
+	}
+
+	return primes
+}
 
 // ##
 // ##	Two pointers problems

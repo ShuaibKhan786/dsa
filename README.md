@@ -34,4 +34,5 @@ I used neetcode [roadmap](https://neetcode.io/roadmap)
 21. Time Based Key-Value Store (since set timestamp is in increasing order, do BS) [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/problems/problem21.go)
 
 ## PROBLEMS (Window Sliding)
-22.  Maximum Average Subarray I (subtract the previou ele in left pointer and add the new element to the previous sum) [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/problems/problem22.go)
+22.  Maximum Average Subarray I (subtract the previous ele in left pointer and add the new element to the previous sum) [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/problems/problem22.go)
+23.  Buy and Sell Crypto (dynamic size window) [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/problems/problem23.go)

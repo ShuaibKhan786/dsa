@@ -8,3 +8,5 @@
 6. Remove duplicate elements from an array [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/basics/problems/problem1.go)
 7. Missing element in an integer array [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/basics/problems/problem1.go)
 8. Single element from an array where all elements repeat twice except one element [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/basics/problems/problem1.go)
+9. Check wether a number is prime number or not(trial division) [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/basics/problems/problem1.go)
+10. Find next n prime numbers [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/basics/problems/problem1.go)
