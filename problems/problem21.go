@@ -43,7 +43,7 @@ type TimeMap struct {
 	Store map[string][]Pair
 }
 
-func new() *TimeMap {
+func newTM() *TimeMap {
 	return &TimeMap{
 		make(map[string][]Pair),
 	}
@@ -83,7 +83,7 @@ func (t *TimeMap) get(key string, timestamp int) string {
 }
 
 func main() {
-	obj := new()
+	obj := newTM()
 	obj.set("alice", "happy", 1)
 	first := obj.get("alice", 1) //happy
 	if first != "happy" {
