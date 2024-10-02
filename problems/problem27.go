@@ -80,6 +80,24 @@ func (ll *SinglyLL) Length() int {
 	return ll.Len
 }
 
+// this method is similar to reverseLinkList function where 
+// head node is given and do the reverse logic and then return the head node
+func (ll *SinglyLL) Reverse() {
+	ll.Tail = ll.Head
+	var prev *Node = nil 
+
+	for ll.Head != nil {
+		cachedNext := ll.Head.Next
+
+		ll.Head.Next = prev
+		prev = ll.Head
+
+		ll.Head = cachedNext
+	}
+
+	ll.Head = prev
+}
+
 func main() {
 	sll := NewSLL()
 
@@ -93,11 +111,8 @@ func main() {
 	sll.Insert(10)
 
 	sll.Traverse()
-	fmt.Println(sll.Len)
 
-	sll.Delete(10)
-	sll.Delete(10)
+	sll.Reverse()
 
 	sll.Traverse()
-	fmt.Println(sll.Length())
 }

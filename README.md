@@ -39,3 +39,6 @@ I used neetcode [roadmap](https://neetcode.io/roadmap)
 24.  Longest Substring Without Duplicates (dynamic size window and set for checking repeated character) [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/problems/problem24.go)
 25.  Minimum Window Substring (use left ptr to find the minimum sub string and right ptr to find that WS that contains the target sub string characters) [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/problems/problem25.go)
 26.  Sliding Window Maximum (monotonic queue) [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/problems/problem26.go)
+
+## PROBLEMS (Link List)
+27.  Reverse a singly linklist [mySolution](https://github.com/ShuaibKhan786/dsa/blob/main/problems/problem27.go)
