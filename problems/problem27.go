@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Node struct {
 	Data int
@@ -10,14 +12,14 @@ type Node struct {
 type SinglyLL struct {
 	Head *Node
 	Tail *Node
-	Len int
+	Len  int
 }
 
 func NewSLL() *SinglyLL {
 	return &SinglyLL{
 		Head: nil,
 		Tail: nil,
-		Len: 0,
+		Len:  0,
 	}
 }
 
@@ -80,11 +82,11 @@ func (ll *SinglyLL) Length() int {
 	return ll.Len
 }
 
-// this method is similar to reverseLinkList function where 
+// this method is similar to reverseLinkList function where
 // head node is given and do the reverse logic and then return the head node
 func (ll *SinglyLL) Reverse() {
 	ll.Tail = ll.Head
-	var prev *Node = nil 
+	var prev *Node = nil
 
 	for ll.Head != nil {
 		cachedNext := ll.Head.Next
@@ -98,8 +100,8 @@ func (ll *SinglyLL) Reverse() {
 	ll.Head = prev
 }
 
-//here two ASC sorted list1 and list2 singlylist in given
-//and I need to merge it
+// here two ASC sorted list1 and list2 singlylist in given
+// and I need to merge it
 func mergeTwoSortedLL(list1, list2 *Node) *Node {
 	var head *Node = nil
 	var tail *Node = nil
@@ -145,6 +147,87 @@ func mergeTwoSortedLL(list1, list2 *Node) *Node {
 	return head
 }
 
+func reorderBrutfore(head *Node) {
+	//first we create an array to store the address of each node
+	arr := make([]*Node, 0)
+
+	for head != nil {
+		arr = append(arr, head)
+		head = head.Next
+	}
+	head = nil
+	//we just used two pointer one goes from left and right
+	//if left traverse once then right must and son
+	left := 0
+	right := len(arr) - 1
+	var tail *Node = nil
+
+	state := true
+	for left < right {
+		if head == nil {
+			head = arr[left]
+			tail = head
+			left++
+			state = false
+		} else {
+			if state {
+				tail.Next = arr[left]
+				tail = arr[left]
+				left++
+				state = false
+			} else {
+				tail.Next = arr[right]
+				tail = arr[right]
+				right--
+				state = true
+			}
+		}
+	}
+	tail.Next = nil
+}
+
+func reorder(head *Node) {
+	//first find the midpoint
+	slow := head //this will be the midpoint
+	fast := head
+
+	for fast != nil && fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
+	}
+
+	//next step is to reverse from the midpoint
+	var reverseHead *Node = nil
+	for slow != nil {
+		cachedNext := slow.Next
+
+		slow.Next = reverseHead
+		reverseHead = slow
+
+		slow = cachedNext
+	}
+
+	//merged them
+	first := head
+	second := reverseHead
+
+	for first != nil && second != nil {
+		cachedFirst := first.Next
+		cachedSecond := second.Next
+
+		first.Next = second
+		second.Next = cachedFirst
+
+		first = cachedFirst
+		second = cachedSecond
+	}
+
+	if first != nil { //odd condition
+		first.Next = nil
+	}
+	
+}
+
 func main() {
 
 	//reversing the linklist solution
@@ -177,8 +260,13 @@ func main() {
 	mergedLL := *&SinglyLL{
 		Head: mergeTwoSortedLL(sll1.Head, sll2.Head),
 		Tail: nil,
-		Len: 0,
+		Len:  0,
 	}
 
+	mergedLL.Traverse()
+	// reorderBrutfore(mergedLL.Head)
+	// mergedLL.Traverse()
+
+	reorder(mergedLL.Head)
 	mergedLL.Traverse()
 }
