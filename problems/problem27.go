@@ -1,223 +1,146 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 type Node struct {
 	Data int
 	Next *Node
 }
 
-type SinglyLL struct {
+type SLL struct {
 	Head *Node
-	Tail *Node
-	Len  int
 }
 
-func NewSLL() *SinglyLL {
-	return &SinglyLL{
+func NewSLL() *SLL {
+	return &SLL{
 		Head: nil,
-		Tail: nil,
-		Len:  0,
 	}
 }
 
-func (ll *SinglyLL) Insert(item int) {
-	n := new(Node)
-	n.Data = item
-	n.Next = nil
+func (sll *SLL) Insert(data int) {
+	newNode := &Node{
+		Data: data,
+		Next: nil,
+	}
 
-	if ll.Head == nil {
-		ll.Head = n
-		ll.Tail = n
+	if sll.Head == nil {
+		sll.Head = newNode
 	} else {
-		ll.Tail.Next = n
-		ll.Tail = n
-	}
-
-	ll.Len++
-}
-
-func (ll *SinglyLL) Delete(item int) {
-	if ll.Head == nil {
-		return
-	}
-
-	if ll.Head.Data == item {
-		ll.Head = ll.Head.Next
-		ll.Len--
-		return
-	}
-
-	prev := ll.Head
-	for temp := prev.Next; temp != nil; temp = temp.Next {
-		if temp.Data == item {
-			prev.Next = temp.Next
-			ll.Len--
-			return
-		}
-		prev = temp
+		newNode.Next = sll.Head
+		sll.Head = newNode
 	}
 }
 
-func (ll *SinglyLL) Search(item int) bool {
-	for temp := ll.Head; temp != nil; temp = temp.Next {
-		if temp.Data == item {
-			return true
-		}
-	}
-
-	return false
-}
-
-func (ll *SinglyLL) Traverse() {
-	for temp := ll.Head; temp != nil; temp = temp.Next {
-		fmt.Printf("%d<-", temp.Data)
+func (sll *SLL) Traverse() {
+	for temp := sll.Head; temp != nil; temp = temp.Next {
+		fmt.Printf("%d <- ", temp.Data)
 	}
 	fmt.Println()
 }
 
-func (ll *SinglyLL) Length() int {
-	return ll.Len
-}
-
-// this method is similar to reverseLinkList function where
-// head node is given and do the reverse logic and then return the head node
-func (ll *SinglyLL) Reverse() {
-	ll.Tail = ll.Head
+// reverse a singly linklist
+// TC = O(n), SC = O(1)
+func reverseSLL(sll *SLL) {
 	var prev *Node = nil
 
-	for ll.Head != nil {
-		cachedNext := ll.Head.Next
+	for sll.Head != nil {
+		cachedNext := sll.Head.Next
 
-		ll.Head.Next = prev
-		prev = ll.Head
+		sll.Head.Next = prev
+		prev = sll.Head
 
-		ll.Head = cachedNext
+		sll.Head = cachedNext
 	}
 
-	ll.Head = prev
+	sll.Head = prev
 }
 
-// here two ASC sorted list1 and list2 singlylist in given
-// and I need to merge it
-func mergeTwoSortedLL(list1, list2 *Node) *Node {
-	var head *Node = nil
-	var tail *Node = nil
+//merging two sorted sll ASC
+// TC = O(n+m), SC = O(1)
+func mergeSLL(firstSLL *SLL, secondSLL *SLL) *SLL {
+	var mergedHead *Node = nil 
 
-	for list1 != nil && list2 != nil {
-		if list1.Data < list2.Data {
-			if head == nil {
-				head = list1
-				tail = head
+	mergedTail := mergedHead
+	firstHead := firstSLL.Head
+	secondHead := secondSLL.Head
+
+	for firstHead != nil && secondHead != nil {
+		if firstHead.Data < secondHead.Data {
+			if mergedHead == nil {
+				mergedHead = firstHead
+				mergedTail = mergedHead
 			} else {
-				tail.Next = list1
-				tail = tail.Next
+				mergedTail.Next = firstHead
+				mergedTail = firstHead
 			}
-			list1 = list1.Next
+			firstHead = firstHead.Next
 		} else {
-			if head == nil {
-				head = list2
-				tail = head
+			if mergedHead == nil {
+				mergedHead = secondHead
+				mergedTail = mergedHead
 			} else {
-				tail.Next = list2
-				tail = tail.Next
+				mergedTail.Next = secondHead
+				mergedTail = secondHead
 			}
-			list2 = list2.Next
+			secondHead = secondHead.Next
 		}
 	}
 
-	for list1 != nil {
-		if head == nil {
-			return list1
-		}
-		tail.Next = list1
-		list1 = list1.Next
+	for firstHead != nil {
+		mergedTail.Next = firstHead
+		mergedTail = firstHead
+		firstHead = firstHead.Next
 	}
 
-	for list2 != nil {
-		if head == nil {
-			return list2
-		}
-		tail.Next = list2
-		list2 = list2.Next
+	for secondHead != nil {
+		mergedTail.Next = secondHead
+		mergedTail = secondHead
+		secondHead = secondHead.Next
 	}
 
-	return head
+	return &SLL{
+		Head: mergedHead,
+	}
 }
 
-func reorderBrutfore(head *Node) {
-	//first we create an array to store the address of each node
-	arr := make([]*Node, 0)
-
-	for head != nil {
-		arr = append(arr, head)
-		head = head.Next
-	}
-	head = nil
-	//we just used two pointer one goes from left and right
-	//if left traverse once then right must and son
-	left := 0
-	right := len(arr) - 1
-	var tail *Node = nil
-
-	state := true
-	for left < right {
-		if head == nil {
-			head = arr[left]
-			tail = head
-			left++
-			state = false
-		} else {
-			if state {
-				tail.Next = arr[left]
-				tail = arr[left]
-				left++
-				state = false
-			} else {
-				tail.Next = arr[right]
-				tail = arr[right]
-				right--
-				state = true
-			}
-		}
-	}
-	tail.Next = nil
-}
-
-func reorder(head *Node) {
-	//first find the midpoint
-	slow := head //this will be the midpoint
-	fast := head
+//TC: 
+//	O(n) for finding midpoint
+//	O(n/2) i,e O(n) for reversing second half
+//  O(n) for merging first and seconf half
+//  thus it gets to O(n) + O(n) + O(n) = 3O(n) i,e O(n) we discard coefficient in bigO notation
+//SC: O(1)
+func reorder(sll *SLL) {
+	//step1: find the midpoint
+	slow := sll.Head
+	fast := sll.Head
 
 	for fast != nil && fast.Next != nil {
 		slow = slow.Next
 		fast = fast.Next.Next
 	}
 
-	//next step is to reverse from the midpoint
+	//step2: reversed the second half
 	var reverseHead *Node = nil
 	for slow != nil {
 		cachedNext := slow.Next
 
 		slow.Next = reverseHead
 		reverseHead = slow
-
+		
 		slow = cachedNext
 	}
 
-	//merged them
-	first := head
+	//step3: merged them alternately
+	first := sll.Head
 	second := reverseHead
 
 	for first != nil && second != nil {
 		cachedFirst := first.Next
 		cachedSecond := second.Next
-
+	
 		first.Next = second
 		second.Next = cachedFirst
-
+		
 		first = cachedFirst
 		second = cachedSecond
 	}
@@ -225,48 +148,37 @@ func reorder(head *Node) {
 	if first != nil { //odd condition
 		first.Next = nil
 	}
-	
 }
 
 func main() {
-
-	//reversing the linklist solution
-	sll := NewSLL()
-	sll.Insert(20)
-	sll.Delete(20)
-	sll.Insert(20)
-	sll.Insert(30)
-	sll.Insert(10)
-	sll.Insert(10)
-
-	sll.Traverse()
-
-	sll.Reverse()
-
-	sll.Traverse()
-
-	//merging two sorted linklist solution
 	sll1 := NewSLL()
 	sll1.Insert(1)
-	sll1.Insert(2)
 	sll1.Insert(3)
-	sll1.Insert(5)
+	sll1.Insert(7)
+	sll1.Insert(9)
+	sll1.Insert(10)
+	sll1.Traverse()
+
+	reverseSLL(sll1)
+	sll1.Traverse()
 
 	sll2 := NewSLL()
+	sll2.Insert(1)
+	sll2.Insert(2)
+	sll2.Insert(3)
 	sll2.Insert(4)
+	sll2.Insert(5)
 	sll2.Insert(6)
-	sll2.Insert(7)
+	sll2.Insert(8)
+	sll2.Insert(11)
+	sll2.Traverse()
 
-	mergedLL := *&SinglyLL{
-		Head: mergeTwoSortedLL(sll1.Head, sll2.Head),
-		Tail: nil,
-		Len:  0,
-	}
+	reverseSLL(sll2)
+	sll2.Traverse()
 
-	mergedLL.Traverse()
-	// reorderBrutfore(mergedLL.Head)
-	// mergedLL.Traverse()
+	mergedSll := mergeSLL(sll1, sll2)
+	mergedSll.Traverse()
 
-	reorder(mergedLL.Head)
-	mergedLL.Traverse()
+	reorder(mergedSll)
+	mergedSll.Traverse()
 }
