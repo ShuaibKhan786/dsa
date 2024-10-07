@@ -150,6 +150,62 @@ func reorder(sll *SLL) {
 	}
 }
 
+//TC: O(n)
+//SC: O(1)
+func removeNthFromEndBF(sll *SLL, n int) {
+	length := 0
+
+	//step1: vists all node once to find the length of a linklist
+	for temp := sll.Head; temp != nil; temp = temp.Next {
+		length++
+	}
+
+	//edge case no point of removing the n node which is greater than the length
+	if length < n {
+		return
+	}
+
+	//it means the node we need to remove is head node
+	if length == n {
+		sll.Head = sll.Head.Next
+		return
+	}
+
+	//step2: travserse upto the node just before the node need to be removed
+	temp := sll.Head
+	for i := 1; i < length - n; i++ {
+		temp = temp.Next
+	}
+
+	//removed the node
+	if temp.Next != nil {
+		temp.Next = temp.Next.Next
+	}
+}
+
+func removeNthFromEnd(sll *SLL, n int) {
+	dummy := &Node{ Next: sll.Head}
+	
+	first := dummy
+	second := dummy
+
+	//first must be n head from first
+	for i := 0; i <= n; i++ {
+		first = first.Next
+	}
+
+	for first != nil {
+		first = first.Next
+		second = second.Next
+	}
+
+	//second will point to the node just before nth node we want to removed
+	second.Next = second.Next.Next
+
+	sll.Head = dummy.Next
+}
+
+
 func main() {
 	sll1 := NewSLL()
 	sll1.Insert(1)
@@ -181,4 +237,8 @@ func main() {
 
 	reorder(mergedSll)
 	mergedSll.Traverse()
+
+	removeNthFromEnd(mergedSll, 5)
+	mergedSll.Traverse()
+
 }
