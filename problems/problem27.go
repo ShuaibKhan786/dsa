@@ -205,6 +205,89 @@ func removeNthFromEnd(sll *SLL, n int) {
 	sll.Head = dummy.Next
 }
 
+//TC: O(n) + O(m) i,e O(n+m)
+//SC: O(n)
+//you can combined in one loop but
+//for clarity I do a separate the edge case logic
+func sumOfTwoNumber(sll1, sll2 *SLL) *SLL {
+	l1 := sll1.Head
+	l2 := sll2.Head
+
+	var newHead *Node = nil
+	var newTail *Node = nil
+	carry := 0
+
+	for l1 != nil && l2 != nil {
+		sum := l1.Data + l2.Data + carry
+		remainder := sum % 10
+		carry = sum / 10
+
+		newNode := &Node{
+			Data: remainder,
+			Next: nil,
+		} 
+
+		if newHead == nil {
+			newHead = newNode
+			newTail = newHead
+		} else {
+			newTail.Next = newNode
+			newTail = newNode
+		}
+
+		l1 = l1.Next
+		l2 = l2.Next
+	}
+
+	for l1 != nil {
+		sum := l1.Data + carry
+		remainder := sum % 10
+		carry = sum / 10
+
+		newNode := &Node{
+			Data: remainder,
+			Next: nil,
+		}
+
+		newTail.Next = newNode
+		newTail = newNode
+
+		l1 = l1.Next
+	}
+
+	for l2 != nil {
+		sum := l2.Data + carry
+		remainder := sum % 10
+		carry = sum / 10
+
+		newNode := &Node{
+			Data: remainder,
+			Next: nil,
+		}
+
+		newTail.Next = newNode
+		newTail = newNode
+
+		l2 = l2.Next
+	}
+
+	for carry != 0 {
+		remainder := carry % 10
+		carry = carry / 10
+
+		newNode := &Node{
+			Data: remainder,
+			Next: nil,
+		}
+
+		newTail.Next = newNode
+		newTail = newNode
+	}
+
+	return &SLL{
+		Head: newHead,
+	}
+}
 
 func main() {
 	sll1 := NewSLL()
@@ -241,4 +324,21 @@ func main() {
 	removeNthFromEnd(mergedSll, 5)
 	mergedSll.Traverse()
 
+	fmt.Println("*****Sum of two number*****")
+	l1 := NewSLL()
+	l1.Insert(9)
+	l1.Insert(5)
+	l1.Insert(9)
+	l1.Insert(9)
+	l1.Insert(4)
+	l1.Traverse()
+
+	l2 := NewSLL()
+	l2.Insert(7)
+	l2.Insert(9)
+	l2.Insert(1)
+	l2.Traverse()
+
+	sum := sumOfTwoNumber(l1, l2)
+	sum.Traverse()
 }
