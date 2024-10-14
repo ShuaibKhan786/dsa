@@ -289,6 +289,22 @@ func sumOfTwoNumber(sll1, sll2 *SLL) *SLL {
 	}
 }
 
+func hasCycle(head *Node) bool {
+	tortoise := head
+	rabbit := head
+
+	for tortoise != nil && rabbit != nil && rabbit.Next != nil {
+		tortoise = tortoise.Next
+		rabbit = rabbit.Next.Next
+
+		if tortoise == rabbit {
+			return true
+		}
+	}
+
+	return false
+}
+
 func main() {
 	sll1 := NewSLL()
 	sll1.Insert(1)
@@ -341,4 +357,18 @@ func main() {
 
 	sum := sumOfTwoNumber(l1, l2)
 	sum.Traverse()
+
+	fmt.Println("*****Linked List cycle*****")
+	n1 := &Node{ Data: 1, Next: nil}
+	n2 := &Node{ Data: 2, Next: nil}
+	n3 := &Node{ Data: 3, Next: nil}
+	n4 := &Node{ Data: 4, Next: nil}
+
+	head := n1
+	n1.Next = n2
+	n2.Next = n3
+	n3.Next = n4
+	n4.Next = n2
+
+	fmt.Println(hasCycle(head))
 }
